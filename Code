@@ -1,4 +1,28 @@
+SoftwareSerial gsm(10,11);
+const int buttonPin1 = 7;
+const int buttonPin2 = 8;
+int buttonState1 = 0;
+int buttonState2 = 0;
 
+
+//Inisialisasi
+void setup() {
+    delay(10000);
+    Serial.begin(9600); 
+    gsm.begin(9600); 
+    pinMode(buttonPin1, INPUT); 
+    pinMode(buttonPin2, INPUT);
+    pinMode(5, OUTPUT); 
+    pinMode(4, OUTPUT); 
+}
+
+
+buttonState1 = digitalRead(buttonPin1);
+buttonState2 = digitalRead(buttonPin2);
+buttonState1 = digitalRead(buttonPin1);
+buttonState2 = digitalRead(buttonPin2);
+if (gsm.available() > 0)  
+    Serial.write(gsm.read());
 
 
 //Fungsi untuk program mengirim telefon ketika button satu ditekan

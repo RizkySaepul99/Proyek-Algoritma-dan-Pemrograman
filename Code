@@ -1,1 +1,38 @@
 
+
+
+//Fungsi untuk program mengirim telefon ketika button satu ditekan
+if (buttonState1 == HIGH) {
+    gsm.println("ATD7007651787;"); 
+    delay(100);
+    digitalWrite(5, HIGH);  
+    gsm.println("ATH"); 
+    delay(2000);
+    Serial.println("calling.....");
+    digitalWrite(5, LOW);   
+}
+
+//Fungsi untuk program mengirim SMS ketika button dua ditekan
+if (buttonState2 == HIGH) {
+    Serial.println("Sending Message");
+    digitalWrite(4, HIGH); 
+    gsm.println("AT+CMGF=1"); 
+    delay(1000);
+    gsm.println("AT+CMGS=\"7007651787\"\r"); 
+    delay(1000);
+    gsm.println("Techatronic.com"); 
+    delay(100);
+    gsm.println((char)26); 
+    delay(1000);
+    Serial.println("Message has been sent");
+    digitalWrite(4, LOW); 
+}
+
+//Fungsi untuk program menerima SMS
+void RecieveMessage() {
+    Serial.println("gsm RECEIVE SMS");
+    delay(1000);  
+    gsm.println("AT+CNMI=2,2,0,0,0");
+    delay(1000);  
+    Serial.write("Unread Message done");
+}
